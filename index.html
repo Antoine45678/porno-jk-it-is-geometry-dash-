@@ -1,0 +1,1186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geometry Dash Players</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            text-align: center;
+            background: url('https://i.ytimg.com/vi/DJbRhOCiPHI/hq720.jpg') no-repeat center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 16px;
+        }
+    
+        .enter-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .enter-screen h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            cursor: pointer;
+            z-index: 20;
+        }
+
+        .enter-screen img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            z-index: 10;
+        }
+
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 32px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .card {
+            background-color: rgba(45, 55, 72, 0.85);
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .card img {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            margin-bottom: 16px;
+        }
+
+        .card p {
+            font-size: 1.125rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .leaderboard {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        .leaderboard h2 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+
+        .leaderboard table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .leaderboard table th, .leaderboard table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #444;
+        }
+
+        .leaderboard table th {
+            font-size: 1.1rem;
+            color: #ffcc00;
+        }
+
+        .leaderboard table td {
+            font-size: 1rem;
+        }
+
+        .leaderboard table tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Button for showcasing videos */
+        .showcase-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ffcc00;
+            color: black;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 15;
+        }
+
+        .showcase-button:hover {
+            background-color: #ff9900;
+        }
+
+        /* Showcase Section */
+        .showcase {
+            display: none;
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .showcase iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+<!-- Button -->
+<button id="demonButton" onclick="showDemonList()">Show Top 10 Hardest Geometry Dash Demons</button>
+
+<!-- Demon List (Initially Hidden) -->
+<div id="demonList">
+    <ul>
+        <li>#1 - Tidal Wave by OniLink</li>
+        <li>#2 - Nullscapes by Kiba</li>
+        <li>#3 - Avernus by PockeWindfish</li>
+        <li>#4 - Anathema by nikroplays</li>
+        <li>#5 - Acheron by ryamu</li>
+        <li>#6 - Silent Clubstep by TheRealSailent</li>
+        <li>#7 - Spectre by xander</li>
+        <li>#8 - Tunnel of Despair by Exen</li>
+        <li>#9 - Abyss of Darkness by Exen</li>
+        <li>#10 - Kyouki by 出見塩</li>
+    </ul>
+    <!-- Button to Redirect to Pointercrate -->
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Top Right Button</title>
+        <style>
+            /* Styling for the container to position it at the top right */
+            .top-right {
+                position: fixed;
+                top: 10px; /* Adjust distance from the top */
+                right: 10px; /* Adjust distance from the right */
+                z-index: 1000; /* Ensures it's on top of other content */
+            }
+        </style>
+    </head>
+    <body>
+
+        <a href="https://pointercrate.com/demonlist/"target="_blank">
+            <button>See main list</button>
+           </a>
+        </div>
+    
+
+   <!-- Button to Redirect to My youtube page -->
+   <a href="https://www.youtube.com/@Uritongd" target="_blank">
+    <button style="position:fixed; bottom:10px; left:10px; background:rgb(0, 0, 0); color:white;">My info</button>
+</a>
+
+
+<!-- JavaScript -->
+<script>
+    function showDemonList() {
+        const demonList = document.getElementById('demonList');
+        demonList.style.display = (demonList.style.display === 'none' || demonList.style.display === '') ? 'block' : 'none';
+    }
+</script>
+
+<!-- CSS -->
+<style>
+    #demonButton {
+        position: fixed;
+        bottom: 20px; /* Distance from the bottom */
+        right: 20px; /* Distance from the right */
+        background-color: #ff4500;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    #demonList {
+        display: none;
+        position: fixed;
+        bottom: 60px; /* Appears above the button */
+        right: 20px;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: left;
+        width: 3300px;
+    }
+
+    #demonList ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #demonList li {
+        padding: 5px 0;
+    }
+    
+    /* Style for the redirect button */
+    #demonList button {
+        background-color: #ff4500;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 10px; /* Space from the list */
+        width: 100%;
+    }
+</style>
+
+<!-- Demon List (Initially Hidden) -->
+<div id="demonList">
+    <ul>
+        <li>#1 - Tidal Wave by OniLink</li>
+        <li>#2 - Nullscapes by Kiba</li>
+        <li>#3 - Avernus by PockeWindfish</li>
+        <li>#4 - Anathema by nikroplays</li>
+        <li>#5 - Acheron by ryamu</li>
+        <li>#6 - Silent Clubstep by TheRealSailent</li>
+        <li>#7 - Spectre by xander</li>
+        <li>#8 - Tunnel of Despair by Exen</li>
+        <li>#9 - Abyss of Darkness by Exen</li>
+        <li>#10 - Kyouki by 出見塩</li>
+    </ul>
+</div>
+
+<!-- JavaScript -->
+<script>
+    function showDemonList() {
+        const demonList = document.getElementById('demonList');
+        demonList.style.display = (demonList.style.display === 'none' || demonList.style.display === '') ? 'block' : 'none';
+    }
+</script>
+
+<!-- CSS -->
+<style>
+    #demonButton {
+        position: fixed;
+        bottom: 20px; /* Distance from the bottom */
+        right: 20px; /* Distance from the right */
+        background-color: #ff4500;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    #demonList {
+        display: none;
+        position: fixed;
+        bottom: 60px; /* Appears above the button */
+        right: 20px;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: left;
+        width: 300px;
+    }
+
+    #demonList ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #demonList li {
+        padding: 5px 0;
+    }
+</style>
+
+
+
+    <!-- Splash Screen -->
+    <div class="enter-screen" id="enterScreen">
+        <img src="https://media.tenor.com/dZX9R1CQ1yEAAAAj/gd-geometry-dash.gif" alt="roblox GIF">
+        <h1 onclick="enterSite()">Click to Enter</h1>
+    </div>
+<!-- Main Content -->
+<div class="main-content" id="mainContent" style="display:none;">
+    <h1>Geometry Dash Players</h1>
+    <div class="grid">
+        <a href="https://www.youtube.com/@Zoink" target="_blank" class="card">
+            <img src="https://yt3.googleusercontent.com/7dRaeXvPwbRaMj8m4FW3SSGofb2HqlLAv6PagjRNR8Xm8dGhrCqZQAQYRuwW_QFx3UMjTFjKqlQ=s160-c-k-c0x00ffffff-no-rj"  alt="Zoink's Icon">
+            <p>Zoink</p>
+        </a>
+        <a href="https://www.youtube.com/@TrickGMD" target="_blank" class="card">
+            <img src="https://static.wikia.nocookie.net/geometry-dash-fan/images/3/32/Trick.jpg/revision/latest?cb=20220127225651" alt="Trick's Icon">
+            <p>Trick</p>
+        </a>
+
+        <a href="https://www.youtube.com/@wpopoff6461" target="_blank" class="card">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFwAAABcCAMAAADUMSJqAAAAZlBMVEVonzn///9mnjZhmyxjnDD9/vxdmSRfmihxpEevypzz9/BbmCB2p05vo0PL3L/P3sRVlRGFsGSoxZOJsmnn7+Kjwo3i69vt8+mArV3b5tOXun280qx8qlfW483G2bmbvIKOtXK0zKPjo/GOAAAB90lEQVRoge2W25KCMBBEQwiwgmIEb6yri///kzs9k6C19yI8znmwmLLSiT3NRGMURVEURVEURVkMS/xe2s9L/i29eSEey+035ctcdXfIiiI7uChmaip3Uc2u8W1bzRS3m4zYlnGvV5SXqOY6lK/up9V/4U+0vPahKluo7eNe5Rbl3IMbU12w/i0YURWosuiyr6kYmtnidge1LpeiZ+1sFcr1UzFPHae7yumqW4YOZnuxibr99Kvm0MDXWnrW0EbH6+QLd+CUcPBwvDPU2KJbN9mUo9m38g+B37BmMpab+35GE6Eols8PIvD7GIkKTxtPHwXtadx7WhBBfoeGDyetfTPg/C5YnhBEYOEDXvl8xW8nNwHx4ZR3Kf3E0SFyr8SfnZWJUIVmzJ5aAX7Jj55FkcnySA+jY8tPaZaHaVVscmSwpZiEB7b8kipuDSbK6IcQPGmsa078AxLFjYcPF0dbFPzG8KTcYYsi9eBGYnI9TzOGw7kaHzMnBfGhC/Gm+g0XCHY8JLtC+YAPGFhGgldRXbePOk28lTk+hCHFQ6Z4upJScKOIx9dRbpAFgshiRq63dXQBg53oF3CFxAa+mOM9bcob6jpxrgQ4jNl9EhOftulBBDKs1g8X+G/AEkEEeU88adlz34/LSJsvf0C/1IqiKIqiKIqiLMIHm/ISNZyIycgAAAAASUVORK5CYII=" alt="wPopoff's Icon">
+            <p>wPopoff</p>
+        </a>
+    </div>
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Leaderboard Button</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                flex-direction: column;
+                text-align: center;
+            }
+    
+            .leaderboard {
+                margin-top: 20px;
+                display: none; /* Initially hidden */
+                border: 1px solid #ccc;
+                padding: 20px;
+                width: 300px;
+                background-color: #f9f9f9;
+            }
+    
+            .leaderboard h2 {
+                margin-top: 0;
+            }
+    
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+    
+            th, td {
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+    
+            .toggle-button {
+                padding: 10px 20px;
+                font-size: 16px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                cursor: pointer;
+                border-radius: 8px;
+            }
+    
+            .toggle-button:hover {
+                background-color: #45a049;
+            }
+        </style>
+    </head>
+    <body>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Leaderboard Button</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                    flex-direction: column;
+                    text-align: center;
+                }
+        
+                /* Position the leaderboard button in the top-left corner */
+                .toggle-button {
+                    position: absolute;
+                    top: 20px;
+                    left: 20px;
+                    padding: 10px 20px;
+                    font-size: 16px;
+                    background-color: #4CAF50;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                    border-radius: 8px;
+                }
+        
+                .toggle-button:hover {
+                    background-color: #45a049;
+                }
+        
+                /* Style for the leaderboard with black background and white text */
+                .leaderboard {
+                    margin-top: 20px;
+                    display: none; /* Initially hidden */
+                    border: 1px solid #ccc;
+                    padding: 20px;
+                    width: 300px;
+                    background-color: black;
+                    color: white;
+                }
+        
+                .leaderboard h2 {
+                    margin-top: 0;
+                }
+        
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    color: white;
+                }
+        
+                th, td {
+                    padding: 8px;
+                    text-align: left;
+                    border-bottom: 1px solid #ddd;
+                }
+        
+                th {
+                    background-color: #333;
+                }
+        
+                tr:nth-child(even) {
+                    background-color: #444;
+                }
+        
+                tr:nth-child(odd) {
+                    background-color: #555;
+                }
+            </style>
+        </head>
+        <body>
+        
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Leaderboard Button</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        margin: 0;
+                        padding: 0;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100vh;
+                        flex-direction: column;
+                        text-align: center;
+                    }
+            
+                    /* Position the leaderboard button in the top-left corner */
+                    .toggle-button {
+                        position: absolute;
+                        top: 20px;
+                        left: 20px;
+                        padding: 10px 20px;
+                        font-size: 16px;
+                        background-color: #4CAF50;
+                        color: white;
+                        border: none;
+                        cursor: pointer;
+                        border-radius: 8px;
+                    }
+            
+                    .toggle-button:hover {
+                        background-color: #45a049;
+                    }
+            
+                    /* Style for the leaderboard with black background and white text */
+                    .leaderboard {
+                        margin-top: 20px;
+                        display: none; /* Initially hidden */
+                        border: 1px solid #ccc;
+                        padding: 20px;
+                        width: 300px;
+                        background-color: black;
+                        color: white;
+                    }
+            
+                    .leaderboard h2 {
+                        margin-top: 0;
+                    }
+            
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        color: white;
+                    }
+            
+                    th, td {
+                        padding: 8px;
+                        text-align: left;
+                        border-bottom: 1px solid #ddd;
+                    }
+            
+                    th {
+                        background-color: #333;
+                    }
+            
+                    tr:nth-child(even) {
+                        background-color: #444;
+                    }
+            
+                    tr:nth-child(odd) {
+                        background-color: #555;
+                    }
+                </style>
+            </head>
+            <body>
+            
+            <!-- Button to toggle leaderboard -->
+            <button class="toggle-button" onclick="toggleLeaderboard()">Show Leaderboard</button>
+            
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Leaderboard Button</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        margin: 0;
+                        padding: 0;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100vh;
+                        flex-direction: column;
+                        text-align: center;
+                    }
+            
+                    /* Position the leaderboard button in the top-left corner */
+                    .toggle-button {
+                        position: absolute;
+                        top: 20px;
+                        left: 20px;
+                        padding: 10px 20px;
+                        font-size: 16px;
+                        background-color: #4CAF50;
+                        color: white;
+                        border: none;
+                        cursor: pointer;
+                        border-radius: 8px;
+                    }
+            
+                    .toggle-button:hover {
+                        background-color: #45a049;
+                    }
+            
+                    /* Style for the leaderboard with black background and white text */
+                    .leaderboard {
+                        margin-top: 20px;
+                        display: none; /* Initially hidden */
+                        border: 1px solid #ccc;
+                        padding: 20px;
+                        width: 300px;
+                        background-color: black;
+                        color: white;
+                    }
+            
+                    .leaderboard h2 {
+                        margin-top: 0;
+                    }
+            
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        color: white;
+                    }
+            
+                    th, td {
+                        padding: 8px;
+                        text-align: left;
+                        border-bottom: 1px solid #ddd;
+                    }
+            
+                    th {
+                        background-color: #333;
+                    }
+            
+                    tr:nth-child(even) {
+                        background-color: #444;
+                    }
+            
+                    tr:nth-child(odd) {
+                        background-color: #555;
+                    }
+                </style>
+            </head>
+            <body>
+            
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Leaderboard Button</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            margin: 0;
+                            padding: 0;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 100vh;
+                            flex-direction: column;
+                            text-align: center;
+                        }
+                
+                        /* Position the leaderboard button in the top-left corner */
+                        .toggle-button {
+                            position: absolute;
+                            top: 20px;
+                            left: 20px;
+                            padding: 10px 20px;
+                            font-size: 16px;
+                            background-color: #4CAF50;
+                            color: white;
+                            border: none;
+                            cursor: pointer;
+                            border-radius: 8px;
+                        }
+                
+                        .toggle-button:hover {
+                            background-color: #45a049;
+                        }
+                
+                        /* Style for the leaderboard with black background and white text */
+                        .leaderboard {
+                            margin-top: 20px;
+                            display: none; /* Initially hidden */
+                            border: 1px solid #ccc;
+                            padding: 20px;
+                            width: 300px;
+                            background-color: black;
+                            color: white;
+                        }
+                
+                        .leaderboard h2 {
+                            margin-top: 0;
+                        }
+                
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            color: white;
+                        }
+                
+                        th, td {
+                            padding: 8px;
+                            text-align: left;
+                            border-bottom: 1px solid #ddd;
+                        }
+                
+                        th {
+                            background-color: #333;
+                        }
+                
+                        tr:nth-child(even) {
+                            background-color: #444;
+                        }
+                
+                        tr:nth-child(odd) {
+                            background-color: #555;
+                        }
+                    </style>
+                </head>
+                <body>
+                
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Leaderboard Button</title>
+                        <style>
+                            body {
+                                font-family: Arial, sans-serif;
+                                margin: 0;
+                                padding: 0;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                height: 100vh;
+                                flex-direction: column;
+                                text-align: center;
+                            }
+                    
+                            /* Position the leaderboard button in the top-left corner */
+                            .toggle-button {
+                                position: absolute;
+                                top: 20px;
+                                left: 20px;
+                                padding: 10px 20px;
+                                font-size: 16px;
+                                background-color: #4CAF50;
+                                color: white;
+                                border: none;
+                                cursor: pointer;
+                                border-radius: 8px;
+                            }
+                    
+                            .toggle-button:hover {
+                                background-color: #45a049;
+                            }
+                    
+                            /* Style for the leaderboard with black background and white text */
+                            .leaderboard {
+                                margin-top: 20px;
+                                display: none; /* Initially hidden */
+                                border: 1px solid #ccc;
+                                padding: 20px;
+                                width: 300px;
+                                background-color: black;
+                                color: white;
+                            }
+                    
+                            .leaderboard h2 {
+                                margin-top: 0;
+                            }
+                    
+                            table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                color: white;
+                            }
+                    
+                            th, td {
+                                padding: 8px;
+                                text-align: left;
+                                border-bottom: 1px solid #ddd;
+                            }
+                    
+                            th {
+                                background-color: #333;
+                            }
+                    
+                            tr:nth-child(even) {
+                                background-color: #444;
+                            }
+                    
+                            tr:nth-child(odd) {
+                                background-color: #555;
+                            }
+                    
+                            /* Style for the button at 5th place */
+                            .see-all-button {
+                                padding: 10px;
+                                background-color: #007BFF;
+                                color: white;
+                                border: none;
+                                cursor: pointer;
+                                border-radius: 8px;
+                                text-align: center;
+                                display: block;
+                                width: 100%;
+                                margin-top: 10px;
+                            }
+                    
+                            .see-all-button:hover {
+                                background-color: #0056b3;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                    
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Leaderboard Button</title>
+                            <style>
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    margin: 0;
+                                    padding: 0;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    height: 100vh;
+                                    flex-direction: column;
+                                    text-align: center;
+                                }
+                        
+                                /* Position the leaderboard button in the top-left corner */
+                                .toggle-button {
+                                    position: absolute;
+                                    top: 20px;
+                                    left: 20px;
+                                    padding: 10px 20px;
+                                    font-size: 16px;
+                                    background-color: #4CAF50;
+                                    color: white;
+                                    border: none;
+                                    cursor: pointer;
+                                    border-radius: 8px;
+                                }
+                        
+                                .toggle-button:hover {
+                                    background-color: #45a049;
+                                }
+                        
+                                /* Style for the leaderboard with black background and white text */
+                                .leaderboard {
+                                    margin-top: 20px;
+                                    display: none; /* Initially hidden */
+                                    border: 1px solid #ccc;
+                                    padding: 20px;
+                                    width: 300px;
+                                    background-color: black;
+                                    color: white;
+                                }
+                        
+                                .leaderboard h2 {
+                                    margin-top: 0;
+                                }
+                        
+                                table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                    color: white;
+                                }
+                        
+                                th, td {
+                                    padding: 8px;
+                                    text-align: left;
+                                    border-bottom: 1px solid #ddd;
+                                }
+                        
+                                th {
+                                    background-color: #333;
+                                }
+                        
+                                tr:nth-child(even) {
+                                    background-color: #444;
+                                }
+                        
+                                tr:nth-child(odd) {
+                                    background-color: #555;
+                                }
+                        
+                                /* Style for the button at 5th place */
+                                .see-all-button {
+                                    padding: 10px;
+                                    background-color: #007BFF;
+                                    color: white;
+                                    border: none;
+                                    cursor: pointer;
+                                    border-radius: 8px;
+                                    text-align: center;
+                                    display: block;
+                                    width: 100%;
+                                    margin-top: 10px;
+                                }
+                        
+                                .see-all-button:hover {
+                                    background-color: #0056b3;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                        
+                            <!DOCTYPE html>
+                            <html lang="en">
+                            <head>
+                                <meta charset="UTF-8">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                <title>Leaderboard Button</title>
+                                <style>
+                                    body {
+                                        font-family: Arial, sans-serif;
+                                        margin: 0;
+                                        padding: 0;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        height: 100vh;
+                                        flex-direction: column;
+                                        text-align: center;
+                                    }
+                            
+                                    /* Position the leaderboard button in the top-left corner */
+                                    .toggle-button {
+                                        position: absolute;
+                                        top: 20px;
+                                        left: 20px;
+                                        padding: 10px 20px;
+                                        font-size: 16px;
+                                        background-color: #4CAF50;
+                                        color: white;
+                                        border: none;
+                                        cursor: pointer;
+                                        border-radius: 8px;
+                                    }
+                            
+                                    .toggle-button:hover {
+                                        background-color: #45a049;
+                                    }
+                            
+                                    /* Style for the leaderboard with black background and white text */
+                                    .leaderboard {
+                                        margin-top: 20px;
+                                        display: none; /* Initially hidden */
+                                        border: 1px solid #ccc;
+                                        padding: 20px;
+                                        width: 300px;
+                                        background-color: black;
+                                        color: white;
+                                    }
+                            
+                                    .leaderboard h2 {
+                                        margin-top: 0;
+                                    }
+                            
+                                    table {
+                                        width: 100%;
+                                        border-collapse: collapse;
+                                        color: white;
+                                    }
+                            
+                                    th, td {
+                                        padding: 8px;
+                                        text-align: left;
+                                        border-bottom: 1px solid #ddd;
+                                    }
+                            
+                                    th {
+                                        background-color: #333;
+                                    }
+                            
+                                    tr:nth-child(even) {
+                                        background-color: #444;
+                                    }
+                            
+                                    tr:nth-child(odd) {
+                                        background-color: #555;
+                                    }
+                            
+                                    /* Style for the button at 5th place */
+                                    .see-all-button {
+                                        padding: 10px;
+                                        background-color: #007BFF;
+                                        color: white;
+                                        border: none;
+                                        cursor: pointer;
+                                        border-radius: 8px;
+                                        text-align: center;
+                                        display: block;
+                                        width: 100%;
+                                        margin-top: 10px;
+                                    }
+                            
+                                    .see-all-button:hover {
+                                        background-color: #0056b3;
+                                    }
+                                </style>
+                            </head>
+                            <body>
+                            
+                            <!-- Button to toggle leaderboard -->
+                            <button class="toggle-button" onclick="toggleLeaderboard()">Show Leaderboard</button>
+                            
+                            <!-- Hidden leaderboard section -->
+                            <div class="leaderboard" id="leaderboard">
+                                <h2>Leaderboard</h2>
+                                <table>
+                                    <thead>
+                                        
+                                        
+                                    </thead>
+                                    <tbody id="leaderboard-body">
+                                        <!-- Players at 1st to 5th place -->
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Zoink</td>
+                                            <td>7743.54</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Trick</td>
+                                            <td>6813.69</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Thunder</td>
+                                            <td>5066.98</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Wpopoff</td>
+                                            <td>4674.40</td>
+                                        </tr>
+                                        <!-- 5th place button -->
+                                        <tr>
+                                            <td>5</td>
+                                            <td colspan="2">
+                                                <button class="see-all-button" onclick="window.open('https://pointercrate.com/demonlist/statsviewer/', '_blank')">
+                                                    See All Players' Scores
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <script>
+                                function toggleLeaderboard() {
+                                    const leaderboard = document.getElementById('leaderboard');
+                                    // Toggle the visibility of the leaderboard
+                                    if (leaderboard.style.display === 'none' || leaderboard.style.display === '') {
+                                        leaderboard.style.display = 'block';
+                                    } else {
+                                        leaderboard.style.display = 'none';
+                                    }
+                                }
+                            </script>
+                            
+                            </body>
+                            </html>
+                            
+    <!-- Their hardest achievement Button -->
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Wait what is this ?</title>
+        <style>
+            /* Your existing styles go here */
+        </style>
+        <script>
+            // JavaScript to show images when button is clicked
+            function showImages() {
+                var container = document.getElementById('imagesContainer');
+                if (container.style.display === "none") {
+                    container.style.display = "block";
+                } else {
+                    container.style.display = "none";
+                }
+            }
+        </script>
+    </head>
+    <body>
+    
+       
+    
+        <!-- Other content here -->
+    
+        <!-- Add the image display functionality here -->
+       <button>DON'T CLICK ME<button>
+    
+        
+    
+        <!-- More content or footer here -->
+    
+    </body>
+    </html>
+    
+
+    <script>
+        // Enter Screen Logic
+        function enterSite() {
+            document.getElementById("enterScreen").style.display = "none";
+            document.getElementById("mainContent").style.display = "block";
+        }
+
+        // Showcase Logic
+        function toggleShowcase() {
+            const showcase = document.getElementById("showcaseSection");
+            if (showcase.style.display === "none" || showcase.style.display === "") {
+                showcase.style.display = "block";
+            } else {
+                showcase.style.display = "none";
+            }
+        }
+
+        // Sample leaderboard data
+        const leaderboardData = [
+        
+        ];
+
+        const leaderboardBody = document.getElementById("leaderboard-body");
+
+        // Populate the leaderboard dynamically
+        leaderboardData.forEach(entry => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${entry.rank}</td>
+                <td>${entry.player}</td>
+                <td>${entry.score}</td>
+            `;
+            leaderboardBody.appendChild(row);
+        });
+    </script>
+</body>
+</html>
